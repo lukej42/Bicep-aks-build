@@ -1,0 +1,85 @@
+Bicep & Azure ARM
+
+Ignore compiled ARM templates if you only want to version control .bicep files
+
+Uncomment the line below if you compile locally and want to ignore the output
+
+*.json
+
+Ignore Bicep crash files or diagnostic logs
+
+.bicep-crash
+bicep-.log
+
+Azure CLI / PowerShell
+
+.azure/
+.az/
+*AzureRmContext.json
+Connect-AzAccount.log
+
+Kubernetes (AKS)
+
+Prevent accidental commits of cluster credentials
+
+kubeconfig
+kubeconfig
+.kube/
+
+Docker / Container Registry (ACR)
+
+Ignore local docker configurations and image archives
+
+.docker/
+*.tar
+*.tar.gz
+*.tgz
+
+Secrets & Environment Variables
+
+.env
+.env.*
+*.local
+.secret.
+password
+*.pem
+*.pfx
+*.crt
+*.key
+*.cer
+
+Logs & OS Files
+
+.log
+.DS_Store
+.DS_Store?
+._
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+Editor / IDE Configurations
+
+VS Code
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+Visual Studio / Rider / JetBrains
+
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+Miscellaneous
+
+*.swp
+*.bak
+*~
+
+.DS_Store
