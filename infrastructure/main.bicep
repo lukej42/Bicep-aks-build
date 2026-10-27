@@ -24,7 +24,7 @@ module aksModule './modules/aks.bicep' = {
     aksclustername: aksclustername
     location: location
     nodecount: 2
-    nodesize: 'Standard_DS2_v2'
+    nodesize: 'Standard_B1s'
     linuxAdminUsername: 'azureuser'
     linuxAdminPublicKey: linuxAdminPublicKey
     acrName: acrModule.outputs.acrName
