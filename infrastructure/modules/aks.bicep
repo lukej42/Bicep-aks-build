@@ -42,15 +42,15 @@ resource kubernetesCluster 'Microsoft.ContainerService/managedClusters@2026-06-0
   }
 }
 
-// Built-in AcrPull Role Definition ID
+// Built-in AcrPull role. Nodes pull images with the kubelet identity, not the cluster control-plane identity.
 var acrPullRoleId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
+var kubeletObjectId = kubernetesCluster.properties.identityProfile.kubeletidentity.objectId
 
-// Assign AcrPull role to AKS identity
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(acr.id, kubernetesCluster.id, acrPullRoleId)
   scope: acr
   properties: {
-    principalId: kubernetesCluster.identity.principalId
+    principalId: kubeletObjectId
     roleDefinitionId: acrPullRoleId
     principalType: 'ServicePrincipal'
   }

@@ -1,0 +1,38 @@
+trigger: none
+
+pr: none
+
+variables:
+  resourceGroupName: 'bicep-prod'
+  location: 'uksouth'
+  appName: 'dotnet-aks-app'
+
+stages: 
+  - stage: DeployInfrastructure
+    displayName: 'Deploy Bicep Infrastructure'
+    jobs:
+      - job: DeployBicep
+        displayName: 'Run Bicep Deployment'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: AzureCLI@2
+            name: Deploy
+            inputs:
+              azureSubscription: 'Azure subscription'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "Installing Bicep CLI"
+                az bicep install
+
+                echo "Validating Bicep..."
+                az bicep build --file ./infrastructure/main.bicep
+
+                echo "Deploying Bicep to Azure"
+                az deployment group create \
+                  --resource-group $(resourceGroupName) \
+                  --template-file ./infrastructure/main.bicep \
+                  --parameters location=$(location) \
+                  --parameters aksclustername=$(appName)-aks \
+                  --parameters linuxAdminPublicKey="$(linuxAdminPublicKey)"
