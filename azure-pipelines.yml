@@ -33,6 +33,3 @@ stages:
                 az deployment group create \
                   --resource-group $(resourceGroupName) \
                   --template-file ./infrastructure/main.bicep \
-                  --parameters location=$(location) \
-                  --parameters aksclustername=$(appName)-aks \
-                  --parameters linuxAdminPublicKey="$(linuxAdminPublicKey)"
