@@ -14,6 +14,7 @@ bicep-.log
 Azure CLI / PowerShell
 
 .azure/
+.azure-tmp/
 .az/
 *AzureRmContext.json
 Connect-AzAccount.log
